@@ -18,7 +18,13 @@ NAV = [("numbers/", "Numbers"), ("tools/", "Tools"), ("zodiac/", "Zodiac"), ("do
 SITEMAP = []
 
 
+JEKYLL = os.environ.get("JEKYLL") == "1"
+SENT = "@@B@@"
+
+
 def rel(depth):
+    if depth < 0:
+        return SENT
     return "./" if depth == 0 else "../" * depth
 
 
@@ -274,13 +280,45 @@ def simple(path, title, desc, inner, active="", noads=False, trail=None, schema=
         main = f'{top}<div class="wrap content"><div class="prose" style="max-width:none">{inner}</div>{sidebar(depth)}</div>'
     else:
         main = top + inner
+    if JEKYLL:
+        SITEMAP.append(path)
+        assert "{{" not in main and "{%" not in main, path
+        fm = {"layout": "page", "title": title, "desc": desc, "canon": path, "b": b, "active": active,
+              "noads": noads, "nosticky": not (sticky and not noads)}
+        js = "".join('<script type="application/ld+json">' + json.dumps(x, ensure_ascii=False) + "</script>" for x in sch)
+        front = "---\n" + "".join(f"{k}: {json.dumps(v, ensure_ascii=False)}\n" for k, v in fm.items()) + "---\n"
+        write(path, front + js + "\n" + main + "\n")
+        return
     write(path, head(title, desc, path, depth, sch, noads) + header(depth, active) + main + footer(depth, sticky and not noads))
 
 
+def page_layout():
+    """Jekyll layout equivalent of head()+header()+footer() driven by front matter."""
+    h = head("@@TITLE@@", "@@DESC@@", "@@PATH@@", -1)
+    SITEMAP.pop()
+    h = h.replace('data-base="@@B@@">', 'data-base="@@B@@"{% if page.noads %} data-noads{% endif %}>')
+    h = h.replace("@@TITLE@@", "{{ page.title | escape }}").replace("@@DESC@@", "{{ page.desc | escape }}").replace("@@PATH@@", "{{ page.canon }}")
+    hd = header(-1)
+    for u, _ in NAV:
+        hd = hd.replace(f'href="{SENT}{u}">', f'href="{SENT}{u}"{{% if page.active == "{u}" %}} aria-current=page{{% endif %}}>')
+    ft = footer(-1, True)
+    i = ft.index('<div class="sticky-cta"'); j = ft.index("</div>", ft.index('class="x"')) + len("</div>")
+    ft = ft[:i] + "{% unless page.nosticky %}" + ft[i:j] + "{% endunless %}" + ft[j:]
+    pre = '{%- assign B = page.b -%}{%- if page.abs -%}{%- assign B = site.baseurl | append: "/" -%}{%- endif -%}\n'
+    out = pre + (h + hd + "{{ content }}" + ft).replace(SENT, "{{ B }}")
+    os.makedirs(os.path.join(ROOT, "_layouts"), exist_ok=True)
+    open(os.path.join(ROOT, "_layouts/page.html"), "w", encoding="utf-8").write(out)
+
+
 def build():
-    # number pages
-    for n in NUMS:
-        number_page(n)
+    # number pages (in Jekyll mode they are rendered by GitHub Pages from _layouts/number.html — see jekyll.py)
+    if JEKYLL:
+        page_layout()
+        for n in NUMS:
+            SITEMAP.append(f"number/{n}/")
+    else:
+        for n in NUMS:
+            number_page(n)
     # num index js
     open(os.path.join(ROOT, "assets/js/num-index.js"), "w").write("window.NUM_INDEX=" + json.dumps(list(NUMS.keys())) + ";")
     # content pages
@@ -318,15 +356,29 @@ def build():
     cards = "".join(f'<a class="card" href="{{b}}guides/{g["slug"]}/"><span class="tag t-neutral">{g["tag"]}</span><h3 style="margin-top:10px">{E(g["title"])}</h3><p class="micro">{E(g["desc"])}</p></a>' for g in GUIDES)
     simple("guides/", "Guides: Chinese Lucky Numbers, Tetraphobia, Numeric Domains | 447766", "In-depth guides to Chinese number culture, lucky numbers by occasion, number slang, numeric domains and angel numbers.",
            f'<div class="wrap"><h1>Guides</h1><p class="lead">Deep dives into the culture, money and psychology of numbers.</p>{ad("top")}<div class="grid g3">{cards}</div></div>', "guides/", trail=[("Guides", None)])
+    if JEKYLL:  # 404 is served at any path -> links resolved from site.baseurl
+        body404 = ('<div class="wrap page-hero" style="text-align:center;padding:80px 16px"><div class="code" style="justify-content:center"><div class="dg d4">4<span>死</span></div><div class="dg d4">0<span>零</span></div><div class="dg d4">4<span>死</span></div></div>'
+                   '<h1>Unlucky! Page not found.</h1><p class="lead" style="margin:0 auto 20px">404 is about as unlucky as numbers get in Chinese. Let us turn it into a 6.</p>'
+                   '<a class="btn btn-red" href="{{ site.baseurl }}/">Go home</a> <a class="btn btn-ghost" href="{{ site.baseurl }}/lookup/">Look up a number</a></div>')
+        fm = {"layout": "page", "title": "Page not found | 447766", "desc": "This number doesn't exist… yet.", "canon": "404.html", "b": "/", "abs": True,
+              "active": "", "noads": True, "nosticky": True, "permalink": "/404.html"}
+        open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8").write("---\n" + "".join(f"{k}: {json.dumps(v, ensure_ascii=False)}\n" for k, v in fm.items()) + "---\n" + body404 + "\n")
+        SITEMAP.append("404.html")
     # 404 (served at any path on GitHub Pages -> absolute URLs)
     GH = "https://webworksa1.github.io/447766-com/"
     page404 = head("Page not found | 447766", "This number doesn't exist… yet.", "404.html", 0, noads=True) + header(0) + \
         '<div class="wrap page-hero" style="text-align:center;padding:80px 16px"><div class="code" style="justify-content:center"><div class="dg d4">4<span>死</span></div><div class="dg d4">0<span>零</span></div><div class="dg d4">4<span>死</span></div></div><h1>Unlucky! Page not found.</h1><p class="lead" style="margin:0 auto 20px">404 is about as unlucky as numbers get in Chinese. Let us turn it into a 6.</p><a class="btn btn-red" href="./">Go home</a> <a class="btn btn-ghost" href="./lookup/">Look up a number</a></div>' + footer(0, False)
     page404 = page404.replace('href="./', 'href="' + GH).replace('src="./', 'src="' + GH).replace('data-base="./"', 'data-base="' + GH + '"')
-    write("404.html", page404)
+    if not JEKYLL:
+        write("404.html", page404)
     # sitemap
-    urls = "".join(f"<url><loc>{SITE_URL}{p}</loc><lastmod>{TODAY}</lastmod></url>" for p in SITEMAP if p != "404.html")
-    open(os.path.join(ROOT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
+    if JEKYLL:
+        sm = ('---\nlayout: null\n---\n<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+              '{% for p in site.pages %}{% if p.name == "index.html" %}<url><loc>https://447766.com{{ p.url }}</loc><lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod></url>\n{% endif %}{% endfor %}</urlset>\n')
+        open(os.path.join(ROOT, "sitemap.xml"), "w").write(sm)
+    else:
+        urls = "".join(f"<url><loc>{SITE_URL}{p}</loc><lastmod>{TODAY}</lastmod></url>" for p in SITEMAP if p != "404.html")
+        open(os.path.join(ROOT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
     print("pages:", len(SITEMAP))
 
 
