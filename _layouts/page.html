@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-base="{{ page.b }}"{% if page.noads %} data-noads{% endif %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title | escape }}</title>
+<meta name="description" content="{{ page.desc | escape }}">
+<link rel="canonical" href="https://447766.com/{{ page.canon }}">
+<meta name="theme-color" content="#447766">
+<meta property="og:type" content="website"><meta property="og:site_name" content="447766 · The Lucky Number Lab">
+<meta property="og:title" content="{{ page.title | escape }}"><meta property="og:description" content="{{ page.desc | escape }}"><meta property="og:url" content="https://447766.com/{{ page.canon }}">
+<meta property="og:image" content="https://447766.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{{ page.b }}assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="{{ page.b }}manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ page.b }}assets/css/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar">Contact, if you are interested in this <a href="https://web.works/contact" target="_blank" rel="noopener">website / domain name / Sponsorship / Advertisement / Partnership</a></div>
+<header class="site-header"><div class="wrap nav">
+<a class="logo" href="{{ page.b }}" aria-label="447766 home"><span class="mark"><i>4</i><i>4</i><i>7</i><i>7</i><i>6</i><i>6</i></span><span>447766<small>The Lucky Number Lab</small></span></a>
+<ul class="menu" id="menu"><li><a href="{{ page.b }}numbers/"{% if page.active == "numbers/" %} aria-current=page{% endif %}>Numbers</a></li><li><a href="{{ page.b }}tools/"{% if page.active == "tools/" %} aria-current=page{% endif %}>Tools</a></li><li><a href="{{ page.b }}zodiac/"{% if page.active == "zodiac/" %} aria-current=page{% endif %}>Zodiac</a></li><li><a href="{{ page.b }}domains/"{% if page.active == "domains/" %} aria-current=page{% endif %}>Domains</a></li><li><a href="{{ page.b }}videos/"{% if page.active == "videos/" %} aria-current=page{% endif %}>Videos</a></li><li><a href="{{ page.b }}guides/"{% if page.active == "guides/" %} aria-current=page{% endif %}>Guides</a></li><li><a href="{{ page.b }}contests/"{% if page.active == "contests/" %} aria-current=page{% endif %}>Contests</a></li><li><a href="{{ page.b }}support/"{% if page.active == "support/" %} aria-current=page{% endif %}>Support</a></li><li class="m-only"><a href="{{ page.b }}get-report/">Free Lucky Report</a></li></ul>
+<button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+<a class="btn btn-red btn-sm nav-cta" href="{{ page.b }}get-report/">Free Lucky Report</a>
+<button class="icon-btn burger" aria-label="Menu" aria-controls="menu" aria-expanded="false">☰</button>
+</div></header>
+<main id="main">
+{{ content }}</main>
+<footer class="site-footer"><div class="wrap">
+<div class="foot-grid">
+<div><a class="logo" href="{{ page.b }}" style="color:#fff"><span class="mark"><i>4</i><i>4</i><i>7</i><i>7</i><i>6</i><i>6</i></span><span>447766<small style="color:#93a09a">The Lucky Number Lab</small></span></a>
+<p style="margin-top:14px;font-size:.92rem">Every number has two stories — East and West. Decode yours. <span class="hz">死死 · 七七 · 顺顺</span> — turn your 4s into 6s.</p>
+<form class="form" data-form="newsletter" data-subject="Newsletter signup" data-success="You're in! Watch for your first lucky number.">
+<label for="nl-email" style="color:#fff">Daily lucky number, free</label>
+<div style="display:flex;gap:8px"><input id="nl-email" type="email" name="email" required placeholder="you@email.com" autocomplete="email"><button class="btn btn-gold btn-sm" type="submit">Join</button></div>
+<input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off"><span class="micro" style="color:#93a09a">No spam. Unsubscribe anytime.</span></form></div>
+<div><h4>Explore</h4><ul><li><a href="{{ page.b }}lookup/">Number lookup</a></li><li><a href="{{ page.b }}numbers/">Numbers A–Z</a></li><li><a href="{{ page.b }}tools/">Lucky tools</a></li><li><a href="{{ page.b }}zodiac/">Chinese zodiac</a></li><li><a href="{{ page.b }}guides/">Guides</a></li><li><a href="{{ page.b }}videos/">Videos</a></li></ul></div>
+<div><h4>Grow with us</h4><ul><li><a href="{{ page.b }}get-report/">Free lucky report</a></li><li><a href="{{ page.b }}domains/#appraisal">Domain appraisal</a></li><li><a href="{{ page.b }}advertise/">Advertise</a></li><li><a href="https://web.works/contact" target="_blank" rel="noopener">Partnership / buy this domain</a></li><li><a href="{{ page.b }}careers/">Careers</a></li></ul></div>
+<div><h4>Community</h4><ul><li><a href="{{ page.b }}contests/">Contests &amp; prizes</a></li><li><a href="{{ page.b }}contest-rules/">Contest rules</a></li><li><a href="{{ page.b }}support/">Support 447766</a></li><li><a href="{{ page.b }}contact/">Contact</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="{{ page.b }}about/">About &amp; methodology</a></li><li><a href="{{ page.b }}privacy/">Privacy</a></li><li><a href="{{ page.b }}terms/">Terms</a></li><li><a href="{{ page.b }}disclaimer/">Disclaimer &amp; trademark</a></li><li><a href="{{ page.b }}sitemap.xml">Sitemap</a></li></ul></div>
+</div>
+<div class="legal">
+<p><b>Trademark &amp; copyright disclosure:</b> 447766.com is an independent publication. "447766" is used solely as a numeric domain name and descriptive identifier; no exclusive rights to the number sequence are claimed and none are infringed. All third-party names, trademarks and logos (including Google, AdSense, YouTube, PayPal, Ko-fi, Buy Me a Coffee, Stripe and GitHub) belong to their respective owners; their mention does not imply endorsement. Embedded videos are played through the official YouTube player and remain the property of their creators. Number readings are traditional cultural associations provided for entertainment and education only. Original text, tools and design © <span data-year>2026</span> 447766.com. All rights reserved. <a href="{{ page.b }}disclaimer/">Full disclosure</a>.</p>
+</div></div></footer>
+{% unless page.nosticky %}<div class="sticky-cta" role="complementary"><p>🎁 Get your free personal lucky-number report.</p><a class="btn btn-red btn-sm" href="{{ page.b }}get-report/">Get it free</a><button class="x" aria-label="Close">×</button></div>{% endunless %}
+<div class="cookie" role="dialog" aria-label="Cookie notice"><p style="margin:0 0 10px">We use cookies for analytics and ads (Google AdSense) to keep our tools free. See our <a href="{{ page.b }}privacy/">privacy policy</a>.</p><button class="btn btn-brand btn-sm" data-consent="yes">Accept</button> <button class="btn btn-ghost btn-sm" data-consent="no">Essential only</button></div>
+<script src="{{ page.b }}assets/js/config.js"></script>
+<script src="{{ page.b }}assets/js/numerology.js"></script>
+<script src="{{ page.b }}assets/js/num-index.js"></script>
+<script src="{{ page.b }}assets/js/main.js" defer></script>
+</body></html>

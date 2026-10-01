@@ -1,0 +1,3 @@
+title: "447766 · The Lucky Number Lab"
+exclude: [src, docs, README.md, Gemfile, Gemfile.lock, node_modules]
+markdown: kramdown
