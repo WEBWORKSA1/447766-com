@@ -174,6 +174,7 @@
 
   function chineseReading(s) {
     if (COMBOS[s]) return COMBOS[s].m;
+    if (s.length === 1) return DIGITS[s].meaning;
     var c = counts(s), parts = [];
     var combos = findCombos(s);
     if (combos.length) parts.push("It contains " + combos.map(function (k) { return k + " (" + COMBOS[k].hz + ")"; }).join(", ") + ".");
