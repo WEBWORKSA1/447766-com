@@ -1,0 +1,125 @@
+{%- assign n = page.n -%}{%- assign a = site.data.n[n] -%}{%- assign K = site.data.k -%}{%- assign chars = n | split: "" -%}
+{%- assign vl = K.verd[a.vk][0] -%}{%- assign vh = K.verd[a.vk][1] -%}
+{%- if a.s > 64 -%}{%- assign gc = "var(--good)" -%}{%- elsif a.s > 44 -%}{%- assign gc = "var(--gold)" -%}{%- else -%}{%- assign gc = "var(--bad)" -%}{%- endif -%}
+{%- assign D = site.data.digits[a.ad] -%}{%- assign rk = a.rr | append: "" -%}
+{%- if a.rr < 10 -%}{%- assign R = site.data.digits[rk].lf -%}{%- else -%}{%- assign R = D.lf -%}{%- endif -%}
+{%- capture dh -%}{%- for c in chars -%}{{ site.data.digits[c].hz }}{%- endfor -%}{%- endcapture -%}
+{%- capture an0 -%}{%- if a.rep == 1 -%}A repeating sequence of {{ a.ad }} amplifies its message of {{ D.an }}.{%- else -%}{%- assign bls = a.bl | split: "" -%}Led by {{ a.ad }} ({{ D.an }}){%- if bls.size > 0 -%}, blended with {% for x in bls %}{{ x }} ({{ site.data.digits[x].th }}){% unless forloop.last %}, {% endunless %}{% endfor %}{%- endif -%}.{%- endif -%}{%- if a.rr < 10 %} It reduces to {{ a.rr }}, the number of {{ site.data.digits[rk].an }}.{% else %} It reduces to the master number {{ a.rr }} — heightened intuition and purpose.{% endif -%}{%- endcapture -%}
+{%- capture an1 -%}In love: {{ D.lf[0] }}; at its core, {{ R[0] }}.{%- endcapture -%}
+{%- capture an2 -%}In work and money: {{ D.lf[1] }}, with an undertone of {{ R[1] }}.{%- endcapture -%}
+{%- capture an3 -%}Spiritually: {{ D.lf[2] }} — and {{ R[2] }}.{%- endcapture -%}
+{%- assign uses = K.uses[a.ut] -%}{%- if a.ul == 1 -%}{%- assign uses = K.love | concat: uses -%}{%- endif -%}
+{%- assign ew = K.ew[a.ew] | replace: "{n}", n -%}{%- assign vid = K.videos[a.v] -%}
+{%- capture q2 -%}{{ n }} is written {{ dh }} and read “{{ a.py }}” in Mandarin.{% for c in chars limit: 4 %}{% assign d = site.data.digits[c] %} {{ c }} ({{ d.hz }}) sounds like {{ d.s }}.{% endfor %}{%- endcapture -%}
+{%- capture ttl %}{{ n }} Meaning in Chinese, Numerology & Angel Numbers — Lucky or Not? | 447766{% endcapture -%}
+{%- capture dsc %}Is {{ n }} lucky? {{ vl }} ({{ a.s }}/100). {{ n }} in Chinese is {{ a.hz }} ({{ a.py }}). {{ a.one }}{% endcapture -%}
+{%- assign dsc = dsc | slice: 0, 300 -%}
+<!doctype html>
+<html lang="en" data-base="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ ttl | escape }}</title>
+<meta name="description" content="{{ dsc | escape }}">
+<link rel="canonical" href="https://447766.com/number/{{ n }}/">
+<meta name="theme-color" content="#447766">
+<meta property="og:type" content="article"><meta property="og:site_name" content="447766 · The Lucky Number Lab">
+<meta property="og:title" content="{{ ttl | escape }}"><meta property="og:description" content="{{ dsc | escape }}"><meta property="og:url" content="https://447766.com/number/{{ n }}/">
+<meta property="og:image" content="https://447766.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":{{ n | append: " Meaning in Chinese, Numerology & Angel Numbers" | jsonify }},"dateModified":"{{ site.time | date: "%Y-%m-%d" }}","datePublished":"2026-10-01","author":{"@type":"Organization","name":"447766 Editorial"},"publisher":{"@type":"Organization","name":"447766.com"},"mainEntityOfPage":"https://447766.com/number/{{ n }}/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":{{ "Is " | append: n | append: " a lucky number in Chinese culture?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ vl | append: " — " | append: n | append: " scores " | append: a.s | append: "/100 on our Chinese luck scale. " | append: a.ch | jsonify }}}},
+{"@type":"Question","name":{{ "What does " | append: n | append: " mean in Chinese?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ q2 | jsonify }}}},
+{"@type":"Question","name":{{ "What is the angel number " | append: n | append: " meaning?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ an0 | append: " " | append: an1 | jsonify }}}},
+{"@type":"Question","name":{{ "Is " | append: n | append: " good for a phone number, licence plate or address?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ uses | join: "; " | prepend: "Best uses: " | append: "." | jsonify }}}},
+{"@type":"Question","name":{{ "What does " | append: n | append: " reduce to in numerology?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ "Adding the digits gives " | append: a.rs | append: ". The root number is " | append: a.rr | append: "." | jsonify }}}},
+{"@type":"Question","name":{{ "How do you say " | append: n | append: " in Mandarin and Cantonese?" | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ "Mandarin: " | append: a.py | append: ". Cantonese (Jyutping): " | append: a.jp | append: "." | jsonify }}}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://447766.com/"},{"@type":"ListItem","position":2,"name":"Numbers","item":"https://447766.com/numbers/"},{"@type":"ListItem","position":3,"name":"{{ n }}","item":"https://447766.com/number/{{ n }}/"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar">Contact, if you are interested in this <a href="https://web.works/contact" target="_blank" rel="noopener">website / domain name / Sponsorship / Advertisement / Partnership</a></div>
+<header class="site-header"><div class="wrap nav">
+<a class="logo" href="../../" aria-label="447766 home"><span class="mark"><i>4</i><i>4</i><i>7</i><i>7</i><i>6</i><i>6</i></span><span>447766<small>The Lucky Number Lab</small></span></a>
+<ul class="menu" id="menu"><li><a href="../../numbers/" aria-current=page>Numbers</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../zodiac/">Zodiac</a></li><li><a href="../../domains/">Domains</a></li><li><a href="../../videos/">Videos</a></li><li><a href="../../guides/">Guides</a></li><li><a href="../../contests/">Contests</a></li><li><a href="../../support/">Support</a></li><li class="m-only"><a href="../../get-report/">Free Lucky Report</a></li></ul>
+<button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+<a class="btn btn-red btn-sm nav-cta" href="../../get-report/">Free Lucky Report</a>
+<button class="icon-btn burger" aria-label="Menu" aria-controls="menu" aria-expanded="false">☰</button>
+</div></header>
+<main id="main">
+<div class="wrap page-hero"><nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> › <a href="../../numbers/">Numbers</a> › {{ n }}</nav>
+<h1>{{ n }} Meaning in Chinese, Numerology &amp; Angel Numbers</h1>
+<div class="byline"><span>By 447766 Editorial</span>·<span>Updated {{ site.time | date: "%Y-%m-%d" }}</span>·<a href="../../about/#methodology">How we score numbers</a></div></div>
+<div class="wrap content"><article class="prose" style="max-width:none">
+<div class="result"><div class="result-top"><div class="gauge" style="--v:{{ a.s }};--c:{{ gc }}"><div><div><b>{{ a.s }}</b><small>luck score</small></div></div></div>
+<div><div class="result-num">{{ n }}</div><div class="result-hz">{{ a.hz | escape }} · {{ a.py | escape }}</div>
+<p style="margin:10px 0 0"><span class="tag t-{{ a.vk }}">{{ vl }} · {{ vh }}</span> <span class="micro">Cantonese: {{ a.jp | escape }}</span></p></div></div>
+<div class="result-body"><p class="quick"><b>Quick answer:</b> {{ a.ch | escape }}</p>
+<div class="share"><a class="btn btn-red btn-sm" href="../../get-report/?n={{ n }}">Email me my lucky report</a><button class="btn btn-ghost btn-sm" data-share="{{ n }}">Share</button></div></div></div>
+<div class="ad " data-slot="top" aria-label="Advertisement"></div>
+{% if a.kn %}<p class='notice'><b>Known meaning:</b> <span class='hz'>{{ a.kn[0] }}</span> — {{ a.kn[1] | escape }}</p>{% endif %}
+<h2>Digit-by-digit breakdown of {{ n }}</h2>
+<div class="table-wrap"><table><thead><tr><th>Digit</th><th>Hanzi</th><th>Mandarin</th><th>Cantonese</th><th>Sounds like</th><th>Luck</th></tr></thead><tbody>{% for c in chars %}{% assign d = site.data.digits[c] %}<tr><td><b>{{ c }}</b></td><td class='hz'>{{ d.hz }}</td><td>{{ d.py }}</td><td>{{ d.jp }}</td><td>{{ d.s | escape }}</td><td>{% if d.w > 0 %}<span class="tag t-lucky">+ lucky</span>{% elsif d.w < 0 %}<span class="tag t-unlucky">− unlucky</span>{% else %}<span class="tag t-neutral">○ neutral</span>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+<h2>What {{ n }} means in Chinese culture</h2>
+<p>{{ a.ch | escape }}</p>
+{% if a.cb.size > 0 %}<h3>Hidden combinations inside {{ n }}</h3><ul>{% for c in a.cb %}<li>{% if c[3] == 1 %}<a href='../../number/{{ c[0] }}/'><b>{{ c[0] }}</b></a>{% else %}<b>{{ c[0] }}</b>{% endif %} <span class='hz'>{{ c[1] }}</span> — {{ c[2] | escape }}</li>{% endfor %}</ul>{% endif %}
+<h2>{{ n }} in Western numerology</h2>
+<p>Adding the digits: <b>{{ a.rs }}</b>. {{ an0 | escape }}</p>
+<div class="ad " data-slot="inContent" aria-label="Advertisement"></div>
+<h2>Angel number {{ n }}: love, career and spirit</h2>
+<ul><li>{{ an1 | escape }}</li><li>{{ an2 | escape }}</li><li>{{ an3 | escape }}</li></ul>
+<p class="notice"><b>East vs West:</b> {{ ew }}</p>
+<h2>Best uses for {{ n }}</h2>
+<ul>{% for u in uses %}<li>{{ u | escape }}</li>{% endfor %}</ul>
+{% if a.sg.size > 0 %}<h3>Luckier alternatives to {{ n }}</h3><div class='chips'>{% for s in a.sg %}<a class='chip good' href='../../lookup/?n={{ s[0] }}'>{{ s[0] }} · {{ s[1] }}</a>{% endfor %}</div>{% endif %}
+<div class="lead-box" style="margin:28px 0"><h3>Want a number that works for <em>you</em>?</h3><p>Get a free personal report: your lucky numbers by birthday and zodiac, numbers to avoid, and how to pick a phone, plate or wedding date.</p><a class="btn btn-gold" href="../../get-report/?n={{ n }}">Get my free report →</a></div>
+<h2>Watch: Chinese lucky numbers explained</h2>
+<div><div class="yt" data-id="{{ vid[0] }}" data-title="{{ vid[1] | escape }}"></div><p class="vid-title">{{ vid[1] | escape }}</p></div>
+<h2>FAQ about {{ n }}</h2>
+<div class="faq">
+<details><summary>Is {{ n }} a lucky number in Chinese culture?</summary><p>{{ vl }} — {{ n }} scores {{ a.s }}/100 on our Chinese luck scale. {{ a.ch | escape }}</p></details>
+<details><summary>What does {{ n }} mean in Chinese?</summary><p>{{ q2 | escape }}</p></details>
+<details><summary>What is the angel number {{ n }} meaning?</summary><p>{{ an0 | escape }} {{ an1 | escape }}</p></details>
+<details><summary>Is {{ n }} good for a phone number, licence plate or address?</summary><p>Best uses: {{ uses | join: "; " | escape }}.</p></details>
+<details><summary>What does {{ n }} reduce to in numerology?</summary><p>Adding the digits gives {{ a.rs }}. The root number is {{ a.rr }}.</p></details>
+<details><summary>How do you say {{ n }} in Mandarin and Cantonese?</summary><p>Mandarin: {{ a.py | escape }}. Cantonese (Jyutping): {{ a.jp | escape }}.</p></details>
+</div>
+<div class="ad " data-slot="inContent" aria-label="Advertisement"></div>
+<h2>Related numbers</h2>
+<div class="num-grid">{% for r in a.rl %}{% assign rs2 = site.data.n[r].s %}<a class='{% if rs2 > 64 %}g{% elsif rs2 < 45 %}b{% else %}n{% endif %}' href='../../number/{{ r }}/'>{{ r }}</a>{% endfor %}</div>
+<p class="micro" style="margin-top:18px">Readings reflect traditional Chinese homophones and Western numerology conventions. They're for entertainment and education, not financial, legal or medical advice. Dialects differ — <a href="../../contact/">suggest a correction</a>.</p>
+<div class="ad " data-slot="multiplex" aria-label="Advertisement"></div>
+</article><aside class="sidebar">
+<div class="card"><h3>Check any number</h3><form data-lookup="go" class="form"><input inputmode="numeric" placeholder="e.g. 168 or your phone" aria-label="Number"><button class="btn btn-red btn-block" type="submit">Reveal meaning</button></form></div>
+<div class="card" style="background:var(--gold-soft)"><h3>🎁 Free lucky report</h3><p class="micro">Your personal lucky numbers, zodiac numbers to avoid, and the best dates — emailed free.</p><a class="btn btn-red btn-block" href="../../get-report/">Get my report</a></div>
+<div class="ad side" data-slot="sidebar" aria-label="Advertisement"></div>
+</aside></div></main>
+<footer class="site-footer"><div class="wrap">
+<div class="foot-grid">
+<div><a class="logo" href="../../" style="color:#fff"><span class="mark"><i>4</i><i>4</i><i>7</i><i>7</i><i>6</i><i>6</i></span><span>447766<small style="color:#93a09a">The Lucky Number Lab</small></span></a>
+<p style="margin-top:14px;font-size:.92rem">Every number has two stories — East and West. Decode yours. <span class="hz">死死 · 七七 · 顺顺</span> — turn your 4s into 6s.</p>
+<form class="form" data-form="newsletter" data-subject="Newsletter signup" data-success="You're in! Watch for your first lucky number.">
+<label for="nl-email" style="color:#fff">Daily lucky number, free</label>
+<div style="display:flex;gap:8px"><input id="nl-email" type="email" name="email" required placeholder="you@email.com" autocomplete="email"><button class="btn btn-gold btn-sm" type="submit">Join</button></div>
+<input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off"><span class="micro" style="color:#93a09a">No spam. Unsubscribe anytime.</span></form></div>
+<div><h4>Explore</h4><ul><li><a href="../../lookup/">Number lookup</a></li><li><a href="../../numbers/">Numbers A–Z</a></li><li><a href="../../tools/">Lucky tools</a></li><li><a href="../../zodiac/">Chinese zodiac</a></li><li><a href="../../guides/">Guides</a></li><li><a href="../../videos/">Videos</a></li></ul></div>
+<div><h4>Grow with us</h4><ul><li><a href="../../get-report/">Free lucky report</a></li><li><a href="../../domains/#appraisal">Domain appraisal</a></li><li><a href="../../advertise/">Advertise</a></li><li><a href="https://web.works/contact" target="_blank" rel="noopener">Partnership / buy this domain</a></li><li><a href="../../careers/">Careers</a></li></ul></div>
+<div><h4>Community</h4><ul><li><a href="../../contests/">Contests &amp; prizes</a></li><li><a href="../../contest-rules/">Contest rules</a></li><li><a href="../../support/">Support 447766</a></li><li><a href="../../contact/">Contact</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="../../about/">About &amp; methodology</a></li><li><a href="../../privacy/">Privacy</a></li><li><a href="../../terms/">Terms</a></li><li><a href="../../disclaimer/">Disclaimer &amp; trademark</a></li><li><a href="../../sitemap.xml">Sitemap</a></li></ul></div>
+</div>
+<div class="legal">
+<p><b>Trademark &amp; copyright disclosure:</b> 447766.com is an independent publication. "447766" is used solely as a numeric domain name and descriptive identifier; no exclusive rights to the number sequence are claimed and none are infringed. All third-party names, trademarks and logos (including Google, AdSense, YouTube, PayPal, Ko-fi, Buy Me a Coffee, Stripe and GitHub) belong to their respective owners; their mention does not imply endorsement. Embedded videos are played through the official YouTube player and remain the property of their creators. Number readings are traditional cultural associations provided for entertainment and education only. Original text, tools and design © <span data-year>2026</span> 447766.com. All rights reserved. <a href="../../disclaimer/">Full disclosure</a>.</p>
+</div></div></footer>
+<div class="sticky-cta" role="complementary"><p>🎁 Get your free personal lucky-number report.</p><a class="btn btn-red btn-sm" href="../../get-report/">Get it free</a><button class="x" aria-label="Close">×</button></div>
+<div class="cookie" role="dialog" aria-label="Cookie notice"><p style="margin:0 0 10px">We use cookies for analytics and ads (Google AdSense) to keep our tools free. See our <a href="../../privacy/">privacy policy</a>.</p><button class="btn btn-brand btn-sm" data-consent="yes">Accept</button> <button class="btn btn-ghost btn-sm" data-consent="no">Essential only</button></div>
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/numerology.js"></script>
+<script src="../../assets/js/num-index.js"></script>
+<script src="../../assets/js/main.js" defer></script>
+</body></html>
